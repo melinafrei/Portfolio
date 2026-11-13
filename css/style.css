@@ -1,0 +1,86 @@
+.ueberschrift-1 {
+    font-size: 12vw;
+    color: blueviolet; 
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif
+}
+.ueberschrift-1 {
+    font-size: 12vw;
+    color: blueviolet;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.absatz {
+    padding: 20px;
+    border: 5px solid rgba(255, 95, 162, 0.9);
+    margin: 20px;
+}
+
+html {
+    min-height: 100%;
+    background: #151322;
+}
+
+body {
+    position: relative;
+    isolation: isolate;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+body::before {
+    position: fixed;
+    z-index: -1;
+    inset: -35%;
+    content: "";
+    background:
+        radial-gradient(ellipse at 20% 25%, rgba(255, 95, 162, 0.9), transparent 38%),
+        radial-gradient(ellipse at 78% 28%, rgba(104, 91, 255, 0.88), transparent 40%),
+        radial-gradient(ellipse at 55% 78%, rgba(40, 210, 190, 0.78), transparent 42%),
+        radial-gradient(ellipse at 15% 82%, rgba(255, 177, 74, 0.72), transparent 38%),
+        #151322;
+    filter: blur(65px);
+    animation: farben-fliessen 24s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+body::after {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    background-image: radial-gradient(rgba(255, 255, 255, 0.32) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+@keyframes farben-fliessen {
+    0% {
+        transform: translate3d(-4%, -3%, 0) rotate(-5deg) scale(1);
+    }
+    50% {
+        transform: translate3d(4%, 3%, 0) rotate(5deg) scale(1.08);
+    }
+    100% {
+        transform: translate3d(-1%, 5%, 0) rotate(-2deg) scale(1.03);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation: none;
+    }
+}
