@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  background-color: black;
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.raster {
+  --spaltenbreite: calc(13.333333vw - 17.066667px);
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  height: 100vh;
+  padding: 64px 16px 16px;
+  padding-bottom: 64px;
+}
+
+.raster__spalte {
+  position: relative;
+  flex: 0 0 var(--spaltenbreite);
+  min-width: 0;
+  transition: flex-basis 500ms ease;
+}
+
+.raster__spalte:hover {
+  flex: 0 0 calc(53.333332vw - 20.266668px);
+}
+
+.raster__spalte img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.raster__pfeil {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  color: white;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+}
+
+button.raster__pfeil {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.raster__spalte:first-child .raster__pfeil {
+  text-align: left;
+}
+
+.raster__spalte:last-child .raster__pfeil {
+  text-align: right;
+}
