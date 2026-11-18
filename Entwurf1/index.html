@@ -13,17 +13,29 @@
 
 <body>
     <main class="raster" aria-label="Raster mit zehn Spalten">
-        <div class="raster__spalte" id="spalte-1"><img src="./test-1.jpg" alt=""><button class="raster__pfeil raster__pfeil--rechts" type="button" aria-label="Zur zehnten Spalte springen">→</button></div>
-        <div class="raster__spalte"><img src="./test-1.jpg" alt=""></div>
-        <div class="raster__spalte"><img src="./test-1.jpg" alt=""></div>
-        <div class="raster__spalte"><img src="./test-1.jpg" alt=""></div>
-        <div class="raster__spalte"><img src="./test-1.jpg" alt=""></div>
-        <div class="raster__spalte"><img src="./test-1.jpg" alt=""></div>
-        <div class="raster__spalte"><img src="./test-1.jpg" alt=""></div>
-        <div class="raster__spalte"><img src="./test-1.jpg" alt=""></div>
-        <div class="raster__spalte"><img src="./test-1.jpg" alt=""></div>
-        <div class="raster__spalte" id="spalte-10"><img src="./test-1.jpg" alt=""><button class="raster__pfeil raster__pfeil--links" type="button" aria-label="Zur ersten Spalte springen">←</button></div>
+        <div class="raster__spalte" id="spalte-1"><img src="data/Semantische_Typografie-5.jpg" alt=""><button class="raster__pfeil raster__pfeil--rechts" type="button" aria-label="Zur zehnten Spalte springen">→</button></div>
+        <div class="raster__spalte"><img src="data/Layout_1-11.jpg" alt=""></div>
+        <div class="raster__spalte"><img src="data/Layout_2-12.jpg" alt=""></div>
+        <div class="raster__spalte"><img src="data/Typo-2.jpg" alt=""></div>
+        <div class="raster__spalte"><img src="data/Paris_Vorprojekt-10.jpg" alt=""></div>
+        <div class="raster__spalte"><img src="data/cup.jpg" alt=""></div>
+        <div class="raster__spalte"><video src="data/Motion_Graphics_AE-1.mp4" autoplay muted loop playsinline></video></div>
+        <div class="raster__spalte"><img src="data/Mockup_Blickwechsel.jpg" alt=""></div>
+        <div class="raster__spalte"><img src="data/Mockup_Konzerte.jpg" alt=""></div>
+        <div class="raster__spalte" id="spalte-10" role="button" tabindex="0" aria-label="London-Projekt vergrössern"><img src="data/London_Projekt-24.jpg" alt=""><button class="raster__pfeil raster__pfeil--links" type="button" aria-label="Zur ersten Spalte springen">←</button></div>
     </main>
+    <dialog class="projekt-overlay" aria-label="London-Projekt">
+        <button class="projekt-overlay__schliessen" type="button" aria-label="Overlay schliessen">×</button>
+        <div class="overlay-grid">
+            <img src="data/London_Projekt-24.jpg" alt="London-Projekt">
+            <p class="projekt-text"><span>Just Around</span><span>the corner</span></p>
+            <img class="nebeneinander" src="data/London_Projekt-5.jpg" alt="London-Projekt">
+            <img class="nebeneinander" src="data/London_Projekt-16.jpg" alt="London-Projekt">
+            <img src="data/London_Projekt-23.jpg" alt="London-Projekt">
+            <img class="nebeneinander" src="data/London_Projekt-19.jpg" alt="London-Projekt">
+            <img class="nebeneinander" src="data/London_Projekt-15.jpg" alt="London-Projekt">
+        </div>
+    </dialog>
 </body>
 
 <script src="./script.js"></script>
