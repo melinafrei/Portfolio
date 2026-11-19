@@ -18,6 +18,11 @@ body {
   height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .raster {
@@ -30,6 +35,64 @@ body {
   padding-bottom: 64px;
 }
 
+.startseite-titel {
+  position: fixed;
+  z-index: 2;
+  top: 32px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  color: #650018;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.startseite-name {
+  position: fixed;
+  z-index: 2;
+  top: 32px;
+  left: 16px;
+  transform: translateY(-50%);
+  margin: 0;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.startseite-ueber {
+  position: fixed;
+  z-index: 2;
+  top: 32px;
+  right: 16px;
+  transform: translateY(-50%);
+  margin: 0;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.startseite-titel,
+.startseite-name,
+.startseite-ueber {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  transition: color 150ms ease;
+}
+
+.startseite-titel:hover,
+.startseite-name:hover,
+.startseite-ueber:hover {
+  color: #650018;
+}
+
 .raster__spalte {
   position: relative;
   flex: 0 0 var(--spaltenbreite);
@@ -38,7 +101,8 @@ body {
   transition: flex-basis 500ms ease;
 }
 
-.raster__spalte:hover {
+.raster__spalte:has(img:hover),
+.raster__spalte:has(video:hover) {
   flex: 0 0 calc(53.333332vw - 20.266668px);
 }
 
@@ -51,24 +115,79 @@ body {
   object-position: center;
 }
 
-.raster__pfeil {
+.raster__projekt-titel {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   left: 0;
   width: 100%;
-  height: 40px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.raster__pfeil {
+  position: absolute;
+  top: auto;
+  bottom: -48px;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
   color: white;
-  font-size: 32px;
-  line-height: 40px;
+  font-size: 0;
+  line-height: 24px;
   text-align: center;
 }
 
 button.raster__pfeil {
   padding: 0;
   border: 0;
-  background: transparent;
+  background: rgb(101 0 24 / 72%);
   font-family: inherit;
   cursor: pointer;
+}
+
+.raster__pfeil::before {
+  position: absolute;
+  top: 10px;
+  width: 11px;
+  height: 4px;
+  background: currentColor;
+  content: "";
+}
+
+.raster__pfeil::after {
+  position: absolute;
+  top: 6px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  content: "";
+}
+
+.raster__pfeil--rechts::before {
+  left: 5px;
+}
+
+.raster__pfeil--rechts::after {
+  left: 13px;
+  border-left: 7px solid currentColor;
+}
+
+.raster__pfeil--links::before {
+  right: 5px;
+}
+
+.raster__pfeil--links::after {
+  right: 13px;
+  border-right: 7px solid currentColor;
+}
+
+button.raster__pfeil:hover,
+button.raster__pfeil:focus-visible {
+  background: rgb(255 255 255 / 85%);
+  color: #650018;
 }
 
 .raster__spalte:first-child .raster__pfeil {
@@ -76,6 +195,8 @@ button.raster__pfeil {
 }
 
 .raster__spalte:last-child .raster__pfeil {
+  right: 0;
+  left: auto;
   text-align: right;
 }
 
@@ -95,9 +216,67 @@ button.raster__pfeil {
   border: 0;
   background: #111;
   color: white;
+  overflow-x: hidden;
   overflow-y: auto;
+  scrollbar-width: none;
   animation: none !important;
   transition: none !important;
+}
+
+.projekt-overlay::-webkit-scrollbar {
+  display: none;
+}
+
+.overlay-scrollbar {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 100vh;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.overlay-scrollbar__thumb {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 6px;
+  min-height: 32px;
+  border-radius: 999px;
+  background: rgb(101 0 24 / 82%);
+}
+
+.overlay-scrollbar:hover .overlay-scrollbar__thumb,
+.overlay-scrollbar:focus-visible .overlay-scrollbar__thumb {
+  background: rgb(101 0 24 / 100%);
+}
+
+.start-scrollbar {
+  position: fixed;
+  z-index: 5;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 16px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.start-scrollbar__thumb {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgb(101 0 24 / 82%);
+}
+
+.start-scrollbar:hover .start-scrollbar__thumb,
+.start-scrollbar:focus-visible .start-scrollbar__thumb {
+  background: rgb(101 0 24 / 100%);
 }
 
 .projekt-overlay[open] {
@@ -112,7 +291,7 @@ button.raster__pfeil {
 
 .overlay-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -123,8 +302,290 @@ button.raster__pfeil {
   height: auto;
 }
 
-.overlay-grid img.nebeneinander {
-  grid-column: auto;
+.overlay-grid .overlay-bild-zoom {
+  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay-pfeil-unten {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  transform: translateX(-50%);
+  border: 0;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
+  color: white;
+  --pfeil-farbe: #fff;
+  cursor: pointer;
+}
+
+.overlay-pfeil-unten::before {
+  position: absolute;
+  top: 9px;
+  left: 20px;
+  width: 8px;
+  height: 20px;
+  background: var(--pfeil-farbe);
+  content: "";
+}
+
+.overlay-pfeil-unten::after {
+  position: absolute;
+  top: 25px;
+  left: 11px;
+  border-top: 14px solid var(--pfeil-farbe);
+  border-right: 13px solid transparent;
+  border-left: 13px solid transparent;
+  content: "";
+}
+
+.overlay-pfeil-unten:hover,
+.overlay-pfeil-unten:focus-visible {
+  background: rgb(255 255 255 / 85%);
+  color: #650018;
+  --pfeil-farbe: #650018;
+}
+
+.overlay-grid .overlay-bild-zoom img {
+  transition: transform 300ms ease;
+}
+
+.overlay-grid .overlay-bild-zoom:hover img {
+  transform: scale(1.08);
+}
+
+.overlay-grid .overlay-bild-zoom.nebeneinander {
+  grid-column: span 4;
+}
+
+.overlay-grid .prozess-flaechen {
+  grid-column: 1 / -1;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 16px;
+  min-height: 320px;
+  margin-bottom: 128px;
+}
+
+.overlay-grid .prozess-flaeche {
+  grid-column: 3 / span 4;
+  grid-row: 1;
+  position: relative;
+  min-height: 320px;
+  background: #777;
+  cursor: pointer;
+  transition: transform 600ms ease, opacity 250ms ease;
+}
+
+.overlay-grid .prozess-flaeche--rechts {
+  background: pink;
+}
+
+.overlay-grid .prozess-flaeche--links {
+  background: purple;
+}
+
+.overlay-grid .prozess-flaeche[data-position="links"] {
+  transform: translateX(calc(-100% - 16px));
+}
+
+.overlay-grid .prozess-flaeche[data-position="mitte"] {
+  transform: translateX(0);
+}
+
+.overlay-grid .prozess-flaeche[data-position="rechts"] {
+  transform: translateX(calc(100% + 16px));
+}
+
+.overlay-grid .prozess-flaeche[data-position="ausgang-links"] {
+  transform: translateX(calc(-200% - 32px));
+}
+
+.overlay-grid .prozess-flaeche[data-position="ausgang-rechts"] {
+  transform: translateX(calc(200% + 32px));
+}
+
+.overlay-grid .prozess-flaechen.ohne-transition .prozess-flaeche {
+  transition-property: transform;
+  transition-duration: 0s;
+}
+
+.overlay-grid .prozess-flaechen.zuruecksetzen .prozess-flaeche[data-position^="ausgang"] {
+  opacity: 0;
+}
+
+.prozess-pfeil {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  z-index: 2;
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
+  --arrow-color: #fff;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.prozess-pfeil::before {
+  position: absolute;
+  top: 20.5px;
+  left: 10px;
+  width: 22px;
+  height: 7px;
+  background: var(--arrow-color);
+  content: "";
+}
+
+.prozess-pfeil::after {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 15px solid var(--arrow-color);
+  content: "";
+}
+
+.prozess-pfeil--links {
+  right: auto;
+  left: 16px;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.prozess-flaechen:has(.prozess-flaeche[data-position="links"]:hover) .prozess-pfeil--links,
+.prozess-flaechen:has(.prozess-flaeche[data-position="rechts"]:hover) .prozess-pfeil:not(.prozess-pfeil--links) {
+  background: rgb(255 255 255 / 85%);
+  --arrow-color: #650018;
+}
+
+.prozess-nach-oben {
+  position: absolute;
+  top: calc(100% + 80px);
+  left: 50%;
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
+  --pfeil-farbe: #fff;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.prozess-nach-oben:hover,
+.prozess-nach-oben:focus-visible {
+  background: rgb(255 255 255 / 85%);
+  --pfeil-farbe: #650018;
+}
+
+.prozess-nach-oben::before {
+  position: absolute;
+  top: 8px;
+  left: 11px;
+  border-right: 13px solid transparent;
+  border-bottom: 14px solid var(--pfeil-farbe);
+  border-left: 13px solid transparent;
+  content: "";
+}
+
+.prozess-nach-oben::after {
+  position: absolute;
+  top: 19px;
+  left: 20px;
+  width: 8px;
+  height: 20px;
+  background: var(--pfeil-farbe);
+  content: "";
+}
+
+.semantische-link {
+  position: absolute;
+  top: calc(100% + 80px);
+  right: 16px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.masterabschluss-link {
+  right: auto;
+  left: 16px;
+}
+
+.semantische-pfeil {
+  position: relative;
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
+  --pfeil-farbe: #fff;
+}
+
+.semantische-pfeil--links {
+  transform: scaleX(-1);
+}
+
+.semantische-pfeil::before {
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  width: 11px;
+  height: 4px;
+  background: var(--pfeil-farbe);
+  content: "";
+}
+
+.semantische-pfeil::after {
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 7px solid var(--pfeil-farbe);
+  content: "";
+}
+
+.semantische-link:hover .semantische-pfeil {
+  background: rgb(255 255 255 / 85%);
+  --pfeil-farbe: #650018;
+}
+
+.overlay-grid .prozess-titel {
+  grid-column: 1 / -1;
+  margin: 100px 0 8px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: clamp(3rem, 11vw, 9rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 2000ms ease, opacity 2000ms ease;
+}
+
+.overlay-grid .prozess-titel.sichtbar {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .overlay-grid .projekt-text {
@@ -148,6 +609,8 @@ button.raster__pfeil {
 .overlay-grid .projekt-text span {
   display: block;
   width: 100%;
+  opacity: 0;
+  transition: transform 2000ms ease, opacity 2000ms ease;
 }
 
 .overlay-grid .projekt-text span:first-child {
@@ -156,6 +619,34 @@ button.raster__pfeil {
 
 .overlay-grid .projekt-text span:last-child {
   text-align: right;
+  transform: translateX(100%);
+}
+
+.overlay-grid .projekt-text span:first-child {
+  transform: translateX(-100%);
+}
+
+.overlay-grid .projekt-text.sichtbar span {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.overlay-grid .projekt-text.sichtbar:hover span {
+  opacity: 0;
+}
+
+.overlay-grid .projekt-text.sichtbar:hover span:first-child {
+  transform: translateX(-100%);
+}
+
+.overlay-grid .projekt-text.sichtbar:hover span:last-child {
+  transform: translateX(100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay-grid .projekt-text span {
+    transition: none;
+  }
 }
 
 .overlay-grid img:first-child {
@@ -167,10 +658,17 @@ button.raster__pfeil {
   top: 8px;
   right: 12px;
   z-index: 1;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  padding: 0;
   border: 0;
-  background: transparent;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
   color: white;
-  font-size: 32px;
+  font-size: 40px;
+  line-height: 1;
   cursor: pointer;
 }
 
