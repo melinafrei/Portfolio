@@ -167,7 +167,6 @@ let schwebenLetzterScrollstand = 0;
 function aktualisiereSchwebenTitelAnimation() {
   const dialogPosition = schwebenOverlay.getBoundingClientRect();
   const projekttitel = schwebenOverlay.querySelector(".projekt-text");
-  const prozessTitel = schwebenOverlay.querySelector(".prozess-titel");
   const ausloesepunkt = dialogPosition.top + dialogPosition.height * 0.8;
 
   if (projekttitel && projekttitel.getBoundingClientRect().top <= ausloesepunkt) {
@@ -381,7 +380,7 @@ function verschiebeProzessFlaechen(flaeche, event) {
 }
 
 prozessFlaechenRaster.addEventListener("click", (event) => {
-  const flaeche = event.target.closest(".prozess-flaeche");
+  const flaeche = event.target.closest(".prozess-flache");
   if (flaeche) verschiebeProzessFlaechen(flaeche, event);
 });
 
@@ -756,27 +755,14 @@ function aktualisiereHeatScrollbar() {
 function aktualisiereHeatTitelAnimation() {
   const dialogPosition = heatOverlay.getBoundingClientRect();
   const projektTitel = heatOverlay.querySelector(".projekt-text");
-  const prozessTitel = heatOverlay.querySelector(".prozess-titel");
   const ausloesepunkt = dialogPosition.top + dialogPosition.height * 0.8;
 
   if (projektTitel.getBoundingClientRect().top <= ausloesepunkt) projektTitel.classList.add("sichtbar");
-
-  if (prozessTitel) {
-    const prozessPosition = prozessTitel.getBoundingClientRect();
-    if (heatOverlay.scrollTop > heatLetzterScrollstand && prozessPosition.top <= ausloesepunkt) {
-      prozessTitel.classList.add("sichtbar");
-    } else if (heatOverlay.scrollTop < heatLetzterScrollstand && prozessPosition.top > ausloesepunkt) {
-      prozessTitel.classList.remove("sichtbar");
-    }
-  }
-  heatLetzterScrollstand = heatOverlay.scrollTop;
 }
 
 function oeffneHeatOverlay() {
   heatOverlay.scrollTop = 0;
-  heatLetzterScrollstand = 0;
   heatOverlay.querySelector(".projekt-text").classList.remove("sichtbar");
-  heatOverlay.querySelector(".prozess-titel").classList.remove("sichtbar");
   heatOverlay.showModal();
   requestAnimationFrame(() => {
     aktualisiereHeatTitelAnimation();
@@ -809,5 +795,245 @@ heatOverlay.querySelector(".overlay-pfeil-unten").addEventListener("click", () =
 });
 heatOverlay.querySelector(".prozess-nach-oben").addEventListener("click", () => {
   heatOverlay.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+const parisSpalte = document.querySelector("#spalte-paris");
+const parisOverlay = document.querySelector("#paris-overlay");
+const parisScrollbar = parisOverlay.querySelector(".overlay-scrollbar");
+const parisScrollbarThumb = parisOverlay.querySelector(".overlay-scrollbar__thumb");
+let parisLetzterScrollstand = 0;
+
+function aktualisiereParisScrollbar() {
+  const maxScroll = parisOverlay.scrollHeight - parisOverlay.clientHeight;
+  const trackHeight = parisScrollbar.clientHeight;
+  const thumbHeight = maxScroll > 0
+    ? Math.max(32, trackHeight * parisOverlay.clientHeight / parisOverlay.scrollHeight)
+    : trackHeight;
+  const maxThumbWay = Math.max(0, trackHeight - thumbHeight);
+  const progress = maxScroll > 0 ? parisOverlay.scrollTop / maxScroll : 0;
+  parisScrollbarThumb.style.height = `${thumbHeight}px`;
+  parisScrollbarThumb.style.transform = `translateY(${progress * maxThumbWay}px)`;
+  parisScrollbar.hidden = maxScroll <= 0;
+}
+
+function aktualisiereParisTitelAnimation() {
+  const dialogPosition = parisOverlay.getBoundingClientRect();
+  const projektTitel = parisOverlay.querySelector(".projekt-text");
+  const prozessTitel = parisOverlay.querySelector(".prozess-titel");
+  const ausloesepunkt = dialogPosition.top + dialogPosition.height * 0.8;
+
+  if (projektTitel.getBoundingClientRect().top <= ausloesepunkt) {
+    projektTitel.classList.add("sichtbar");
+  } else {
+    projektTitel.classList.remove("sichtbar");
+  }
+
+  if (prozessTitel) {
+    const prozessTitelPosition = prozessTitel.getBoundingClientRect();
+    if (parisOverlay.scrollTop > parisLetzterScrollstand && prozessTitelPosition.top <= ausloesepunkt) {
+      prozessTitel.classList.add("sichtbar");
+    } else if (parisOverlay.scrollTop < parisLetzterScrollstand && prozessTitelPosition.top > ausloesepunkt) {
+      prozessTitel.classList.remove("sichtbar");
+    }
+  }
+  parisLetzterScrollstand = parisOverlay.scrollTop;
+}
+
+function oeffneParisOverlay() {
+  parisOverlay.scrollTop = 0;
+  parisLetzterScrollstand = 0;
+  parisOverlay.querySelector(".projekt-text").classList.remove("sichtbar");
+  parisOverlay.querySelector(".prozess-titel").classList.remove("sichtbar");
+  parisOverlay.showModal();
+  requestAnimationFrame(() => {
+    aktualisiereParisTitelAnimation();
+    aktualisiereParisScrollbar();
+  });
+}
+
+parisSpalte.addEventListener("click", (event) => {
+  if (event.target.closest(".raster__pfeil")) return;
+  oeffneParisOverlay();
+});
+parisSpalte.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    oeffneParisOverlay();
+  }
+});
+
+parisOverlay.querySelector(".projekt-overlay__schliessen").addEventListener("click", () => parisOverlay.close());
+parisOverlay.addEventListener("click", (event) => {
+  if (event.target === parisOverlay) parisOverlay.close();
+});
+parisOverlay.addEventListener("scroll", () => {
+  aktualisiereParisTitelAnimation();
+  aktualisiereParisScrollbar();
+});
+window.addEventListener("resize", aktualisiereParisScrollbar);
+parisOverlay.querySelector(".overlay-pfeil-unten").addEventListener("click", () => {
+  parisOverlay.querySelector(".projekt-text").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+parisOverlay.querySelector(".prozess-nach-oben").addEventListener("click", () => {
+  parisOverlay.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+const masterabschlussSpalte = document.querySelector("#spalte-masterabschluss");
+const masterabschlussOverlay = document.querySelector("#masterabschluss-overlay");
+const masterabschlussScrollbar = masterabschlussOverlay.querySelector(".overlay-scrollbar");
+const masterabschlussScrollbarThumb = masterabschlussOverlay.querySelector(".overlay-scrollbar__thumb");
+let masterabschlussLetzterScrollstand = 0;
+
+function aktualisiereMasterabschlussScrollbar() {
+  const maxScroll = masterabschlussOverlay.scrollHeight - masterabschlussOverlay.clientHeight;
+  const trackHeight = masterabschlussScrollbar.clientHeight;
+  const thumbHeight = maxScroll > 0
+    ? Math.max(32, trackHeight * masterabschlussOverlay.clientHeight / masterabschlussOverlay.scrollHeight)
+    : trackHeight;
+  const maxThumbWay = Math.max(0, trackHeight - thumbHeight);
+  const progress = maxScroll > 0 ? masterabschlussOverlay.scrollTop / maxScroll : 0;
+  masterabschlussScrollbarThumb.style.height = `${thumbHeight}px`;
+  masterabschlussScrollbarThumb.style.transform = `translateY(${progress * maxThumbWay}px)`;
+  masterabschlussScrollbar.hidden = maxScroll <= 0;
+}
+
+function aktualisiereMasterabschlussTitelAnimation() {
+  const dialogPosition = masterabschlussOverlay.getBoundingClientRect();
+  const projektTitel = masterabschlussOverlay.querySelector(".projekt-text");
+  const prozessTitel = masterabschlussOverlay.querySelector(".prozess-titel");
+  const ausloesepunkt = dialogPosition.top + dialogPosition.height * 0.8;
+
+  if (projektTitel.getBoundingClientRect().top <= ausloesepunkt) {
+    projektTitel.classList.add("sichtbar");
+  } else {
+    projektTitel.classList.remove("sichtbar");
+  }
+
+  if (prozessTitel) {
+    const prozessPosition = prozessTitel.getBoundingClientRect();
+    if (masterabschlussOverlay.scrollTop > masterabschlussLetzterScrollstand && prozessPosition.top <= ausloesepunkt) {
+      prozessTitel.classList.add("sichtbar");
+    } else if (masterabschlussOverlay.scrollTop < masterabschlussLetzterScrollstand && prozessPosition.top > ausloesepunkt) {
+      prozessTitel.classList.remove("sichtbar");
+    }
+  }
+  masterabschlussLetzterScrollstand = masterabschlussOverlay.scrollTop;
+}
+
+function oeffneMasterabschlussOverlay() {
+  masterabschlussOverlay.scrollTop = 0;
+  masterabschlussLetzterScrollstand = 0;
+  masterabschlussOverlay.querySelector(".projekt-text").classList.remove("sichtbar");
+  masterabschlussOverlay.querySelector(".prozess-titel").classList.remove("sichtbar");
+  masterabschlussOverlay.showModal();
+  requestAnimationFrame(() => {
+    aktualisiereMasterabschlussTitelAnimation();
+    aktualisiereMasterabschlussScrollbar();
+  });
+}
+
+masterabschlussSpalte.addEventListener("click", (event) => {
+  if (event.target.closest(".raster__pfeil")) return;
+  oeffneMasterabschlussOverlay();
+});
+masterabschlussSpalte.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    oeffneMasterabschlussOverlay();
+  }
+});
+
+masterabschlussOverlay.querySelector(".projekt-overlay__schliessen").addEventListener("click", () => masterabschlussOverlay.close());
+masterabschlussOverlay.addEventListener("click", (event) => {
+  if (event.target === masterabschlussOverlay) masterabschlussOverlay.close();
+});
+masterabschlussOverlay.addEventListener("scroll", () => {
+  aktualisiereMasterabschlussTitelAnimation();
+  aktualisiereMasterabschlussScrollbar();
+});
+window.addEventListener("resize", aktualisiereMasterabschlussScrollbar);
+masterabschlussOverlay.querySelector(".overlay-pfeil-unten").addEventListener("click", () => {
+  masterabschlussOverlay.querySelector(".projekt-text").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+masterabschlussOverlay.querySelector(".prozess-nach-oben").addEventListener("click", () => {
+  masterabschlussOverlay.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+const stundenSpalte = document.querySelector("#spalte-stunden");
+const stundenOverlay = document.querySelector("#stunden-overlay");
+const stundenScrollbar = stundenOverlay.querySelector(".overlay-scrollbar");
+const stundenScrollbarThumb = stundenOverlay.querySelector(".overlay-scrollbar__thumb");
+let stundenLetzterScrollstand = 0;
+
+function aktualisiereStundenScrollbar() {
+  const maxScroll = stundenOverlay.scrollHeight - stundenOverlay.clientHeight;
+  const trackHeight = stundenScrollbar.clientHeight;
+  const thumbHeight = maxScroll > 0
+    ? Math.max(32, trackHeight * stundenOverlay.clientHeight / stundenOverlay.scrollHeight)
+    : trackHeight;
+  const maxThumbWay = Math.max(0, trackHeight - thumbHeight);
+  const progress = maxScroll > 0 ? stundenOverlay.scrollTop / maxScroll : 0;
+  stundenScrollbarThumb.style.height = `${thumbHeight}px`;
+  stundenScrollbarThumb.style.transform = `translateY(${progress * maxThumbWay}px)`;
+  stundenScrollbar.hidden = maxScroll <= 0;
+}
+
+function aktualisiereStundenTitelAnimation() {
+  const dialogPosition = stundenOverlay.getBoundingClientRect();
+  const projektTitel = stundenOverlay.querySelector(".projekt-text");
+  const prozessTitel = stundenOverlay.querySelector(".prozess-titel");
+  const ausloesepunkt = dialogPosition.top + dialogPosition.height * 0.8;
+
+  if (projektTitel.getBoundingClientRect().top <= ausloesepunkt) projektTitel.classList.add("sichtbar");
+  else projektTitel.classList.remove("sichtbar");
+
+  if (stundenOverlay.scrollTop > stundenLetzterScrollstand && prozessTitel.getBoundingClientRect().top <= ausloesepunkt) {
+    prozessTitel.classList.add("sichtbar");
+  } else if (stundenOverlay.scrollTop < stundenLetzterScrollstand && prozessTitel.getBoundingClientRect().top > ausloesepunkt) {
+    prozessTitel.classList.remove("sichtbar");
+  }
+  stundenLetzterScrollstand = stundenOverlay.scrollTop;
+}
+
+function oeffneStundenOverlay() {
+  stundenOverlay.scrollTop = 0;
+  stundenLetzterScrollstand = 0;
+  stundenOverlay.querySelector(".projekt-text").classList.remove("sichtbar");
+  stundenOverlay.querySelector(".prozess-titel").classList.remove("sichtbar");
+  stundenOverlay.showModal();
+  requestAnimationFrame(() => {
+    aktualisiereStundenTitelAnimation();
+    aktualisiereStundenScrollbar();
+  });
+}
+
+stundenSpalte.addEventListener("click", (event) => {
+  if (event.target.closest(".raster__pfeil")) {
+    ersteSpalte.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    return;
+  }
+  oeffneStundenOverlay();
+});
+stundenSpalte.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    oeffneStundenOverlay();
+  }
+});
+
+stundenOverlay.querySelector(".projekt-overlay__schliessen").addEventListener("click", () => stundenOverlay.close());
+stundenOverlay.addEventListener("click", (event) => {
+  if (event.target === stundenOverlay) stundenOverlay.close();
+});
+stundenOverlay.addEventListener("scroll", () => {
+  aktualisiereStundenTitelAnimation();
+  aktualisiereStundenScrollbar();
+});
+window.addEventListener("resize", aktualisiereStundenScrollbar);
+stundenOverlay.querySelector(".overlay-pfeil-unten").addEventListener("click", () => {
+  stundenOverlay.querySelector(".projekt-text").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+stundenOverlay.querySelector(".prozess-nach-oben").addEventListener("click", () => {
+  stundenOverlay.scrollTo({ top: 0, behavior: "smooth" });
 });
 

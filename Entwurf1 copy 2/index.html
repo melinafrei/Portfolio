@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
 	   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="./style2.css" />
+    <link rel="stylesheet" href="./style2.css?v=20261126" />
 
     <title>Melina Frei</title>
     <meta name="description" content="Portfolio von Melina Frei" />
@@ -20,9 +20,9 @@
         <div class="raster__spalte" id="spalte-10" role="button" tabindex="0" aria-label="London-Projekt vergrössern"><img src="data/London Projekt/London_Projekt-28.jpg" alt=""><span class="raster__projekt-titel">Just Around the Corner</span></div>
         <div class="raster__spalte" id="spalte-impro" role="button" tabindex="0" aria-label="Impro Bzez vergrössern" onclick="document.querySelector('#impro-overlay').showModal()"><video src="data/Impro Bzez/Startbild_Gl5_Raum.mp4" autoplay muted loop playsinline></video><span class="raster__projekt-titel">Impro Bzez</span></div>
         <div class="raster__spalte" id="spalte-heat" role="button" tabindex="0" aria-label="Heat – Sip of Flavour vergrössern"><img src="data/Heat - Sip of Flavour/cup.jpg" alt=""><span class="raster__projekt-titel">Heat – Sip of Flavour</span></div>
-        <div class="raster__spalte"><img src="data/Paris Vorprojekt/Paris_Vorprojekt-14.jpg" alt=""><span class="raster__projekt-titel">Hesch du das scho ghört?</span></div>
-        <div class="raster__spalte"><img src="data/Masterabschlusskonzerte/Startbild.jpg" alt=""><span class="raster__projekt-titel">Masterabschluss Konzerte</span></div>
-        <div class="raster__spalte"><img src="data/Layout 2/Layout_2-16.jpg" alt=""><span class="raster__projekt-titel">24 Stunden</span><button class="raster__pfeil raster__pfeil--links" type="button" aria-label="Zur ersten Spalte springen">←</button></div>
+        <div class="raster__spalte" id="spalte-paris" role="button" tabindex="0" aria-label="Hesch du das scho ghört? vergrössern"><img src="data/Paris Vorprojekt/Paris_Vorprojekt-14.jpg" alt="Hesch du das scho ghört?"><span class="raster__projekt-titel">Hesch du das scho ghört?</span></div>
+        <div class="raster__spalte" id="spalte-masterabschluss" role="button" tabindex="0" aria-label="Masterabschluss Konzerte vergrössern"><img src="data/Masterabschlusskonzerte/Startbild.jpg" alt="Masterabschluss Konzerte"><span class="raster__projekt-titel">Masterabschluss Konzerte</span></div>
+        <div class="raster__spalte" id="spalte-stunden" role="button" tabindex="0" aria-label="24 Stunden vergrössern"><img src="data/Layout 2/Layout_2-16.jpg" alt="24 Stunden"><span class="raster__projekt-titel">24 Stunden</span><button class="raster__pfeil raster__pfeil--links" type="button" aria-label="Zur ersten Spalte springen">←</button></div>
     </main>
     <h1 class="startseite-titel">Projekte</h1>
     <p class="startseite-name">Melina Frei</p>
@@ -296,8 +296,112 @@
             <span class="overlay-scrollbar__thumb"></span>
         </div>
     </dialog>
+
+    <dialog class="projekt-overlay" id="paris-overlay" aria-label="Hesch du das scho ghört?">
+        <button class="projekt-overlay__schliessen" type="button" aria-label="Overlay schliessen">×</button>
+        <div class="overlay-grid" id="paris-overlay-inhalt">
+            <div class="overlay-bild-zoom overlay-bild-zoom--start"><img src="data/Paris Vorprojekt/Paris_Vorprojekt-14.jpg" alt="Hesch du das scho ghört?"><button class="overlay-pfeil-unten" type="button" aria-label="Zum nächsten Inhalt scrollen"></button></div>
+            <p class="projekt-text"><span>Hesch du das</span><span>scho ghört?</span></p>
+            <p class="projektlauftext">Ich sass auf einer Treppenstufe und skizzierte in meinem Skizzenbuch. Um mich herum vermischten sich die Geräusche der Stadt. Vorbeifahrende Autos, Menschen, die miteinander redeten, und dazwischen die leisen Klänge der Natur. Genau dieser Moment wurde zur Idee für meine Broschüre. Für die Gestaltung und Materialsammlung hatte ich ungefähr zwei Wochen Zeit. Ich wollte diese Geräusche auf Papier bringen. Seite für Seite werden die Geräusche immer lauter und das Layout immer verspielter. So soll beim Durchblättern das Gefühl entstehen, mitten im Geschehen zu sitzen.</p>
+            <div class="overlay-bild-zoom projektlauftext-nachfolge"><img src="data/Paris Vorprojekt/Paris_Vorprojekt-8.jpg" alt="Hesch du das scho ghört?"></div>
+            <div class="overlay-bild-zoom nebeneinander"><img src="data/Paris Vorprojekt/Paris_Vorprojekt-2.jpg" alt="Hesch du das scho ghört?"></div>
+            <div class="overlay-bild-zoom nebeneinander"><img src="data/Paris Vorprojekt/Paris_Vorprojekt-3.jpg" alt="Hesch du das scho ghört?"></div>
+            <div class="overlay-bild-zoom"><img src="data/Paris Vorprojekt/Paris_Vorprojekt-5.jpg" alt="Hesch du das scho ghört?"></div>
+            <div class="overlay-bild-zoom nebeneinander"><img src="data/Paris Vorprojekt/Paris_Vorprojekt-6.jpg" alt="Hesch du das scho ghört?"></div>
+            <div class="overlay-bild-zoom nebeneinander"><img src="data/Paris Vorprojekt/Paris_Vorprojekt-10.jpg" alt="Hesch du das scho ghört?"></div>
+            <h2 class="prozess-titel">Prozess</h2>
+            <div class="prozess-flaechen" aria-hidden="true">
+                <div class="prozess-flaeche prozess-flaeche--links" data-position="links" role="button" tabindex="0" aria-label="Flächen nach links verschieben"></div>
+                <div class="prozess-flaeche" data-position="mitte" role="button" tabindex="0" aria-label="Flächen verschieben"></div>
+                <div class="prozess-flaeche prozess-flaeche--rechts" data-position="rechts" role="button" tabindex="0" aria-label="Flächen nach rechts verschieben"></div>
+                <span class="prozess-pfeil prozess-pfeil--links" aria-hidden="true"></span>
+                <span class="prozess-pfeil" aria-hidden="true"></span>
+                <button class="prozess-nach-oben" type="button" aria-label="Im Projekt nach oben springen"></button>
+                <div class="semantische-link">
+                    <span>Impro Bzez</span>
+                    <span class="semantische-pfeil" aria-hidden="true"></span>
+                </div>
+                <div class="semantische-link masterabschluss-link">
+                    <span class="semantische-pfeil semantische-pfeil--links" aria-hidden="true"></span>
+                    <span>Semantische Typografie</span>
+                </div>
+            </div>
+        </div>
+        <div class="overlay-scrollbar" role="scrollbar" aria-label="Projekt scrollen" aria-controls="paris-overlay-inhalt" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+            <span class="overlay-scrollbar__thumb"></span>
+        </div>
+    </dialog>
+
+    <dialog class="projekt-overlay" id="masterabschluss-overlay" aria-label="Masterabschluss Konzerte">
+        <button class="projekt-overlay__schliessen" type="button" aria-label="Overlay schliessen">×</button>
+        <div class="overlay-grid" id="masterabschluss-overlay-inhalt">
+            <div class="overlay-bild-zoom overlay-bild-zoom--start"><img src="data/Masterabschlusskonzerte/Startbild.jpg" alt="Masterabschluss Konzerte"><button class="overlay-pfeil-unten" type="button" aria-label="Zum nächsten Inhalt scrollen"></button></div>
+            <p class="projekt-text masterabschluss-titel"><span>Master</span><span>abschluss</span><span>Konzerte</span></p>
+            <p class="projektlauftext">Für die Masterabschlusskonzerte entwickelte ich ein visuelles Erscheinungsbild aus typografischen, fotografischen und grafischen Elementen. Die Gestaltung verbindet die verschiedenen Konzertabende zu einer zusammenhängenden, klaren Identität und übersetzt die Musik in Bewegung, Farbe und Form. Dabei entstanden ein Plakat, ein digitales Bewegungsformat sowie weitere Kommunikationsmittel für die Konzerte.</p>
+            <div class="masterabschluss-media">
+                <div class="overlay-bild-zoom masterabschluss-mockup"><img src="data/Masterabschlusskonzerte/Mockup_Konzerte.jpg" alt="Masterabschluss Konzerte Mockup"></div>
+                <div class="overlay-bild-zoom masterabschluss-animation"><video src="data/Masterabschlusskonzerte/MAK26_Frei_Melina_Animation_Version2.mp4" autoplay muted loop playsinline></video></div>
+            </div>
+            <div class="overlay-bild-zoom"><img src="data/Masterabschlusskonzerte/Karte_Schallplatten.jpeg" alt="Masterabschlusskonzerte Karte"></div>
+            <h2 class="prozess-titel">Prozess</h2>
+            <div class="prozess-flaechen" aria-hidden="true">
+                <div class="prozess-flaeche prozess-flaeche--links" data-position="links" role="button" tabindex="0" aria-label="Flächen nach links verschieben"></div>
+                <div class="prozess-flaeche" data-position="mitte" role="button" tabindex="0" aria-label="Flächen verschieben"></div>
+                <div class="prozess-flaeche prozess-flaeche--rechts" data-position="rechts" role="button" tabindex="0" aria-label="Flächen nach rechts verschieben"></div>
+                <span class="prozess-pfeil prozess-pfeil--links" aria-hidden="true"></span>
+                <span class="prozess-pfeil" aria-hidden="true"></span>
+                <button class="prozess-nach-oben" type="button" aria-label="Im Projekt nach oben springen"></button>
+                <div class="semantische-link">
+                    <span>Impro Bzez</span>
+                    <span class="semantische-pfeil" aria-hidden="true"></span>
+                </div>
+                <div class="semantische-link masterabschluss-link">
+                    <span class="semantische-pfeil semantische-pfeil--links" aria-hidden="true"></span>
+                    <span>Semantische Typografie</span>
+                </div>
+            </div>
+        </div>
+        <div class="overlay-scrollbar" role="scrollbar" aria-label="Projekt scrollen" aria-controls="masterabschluss-overlay-inhalt" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+            <span class="overlay-scrollbar__thumb"></span>
+        </div>
+    </dialog>
+
+    <dialog class="projekt-overlay" id="stunden-overlay" aria-label="24 Stunden">
+        <button class="projekt-overlay__schliessen" type="button" aria-label="Overlay schliessen">×</button>
+        <div class="overlay-grid" id="stunden-overlay-inhalt">
+            <div class="overlay-bild-zoom overlay-bild-zoom--start"><img src="data/Layout 2/Layout_2-16.jpg" alt="24 Stunden"><button class="overlay-pfeil-unten" type="button" aria-label="Zum nächsten Inhalt scrollen"></button></div>
+            <p class="projekt-text"><span>24</span><span>Stunden</span></p>
+            <p class="projektlauftext">Ich blickte auf die Uhr und fragte mich, was wohl genau in diesem Moment irgendwo auf der Welt geschah. Vielleicht sass jemand gerade beim Abendessen, eilte nach Hause oder erlebte etwas völlig Unerwartetes. Dieser Gedanke begleitete mich durch das Projekt. Inspiriert vom Kunstwerk «The Clock» von Christian Marclay erhielt die ganze Klasse eine bestimmte Uhrzeit und schrieben dazu eine eigene Geschichte. Anschliessend wurden die Szenen fotografiert und gesammelt. Aus diesem Material gestaltete ich während fünf Wochen ein Drehbuch, das chronologisch von einer Geschichte zur nächsten führt und Texte, Bilder und Typografie verbindet. </p>
+            <div class="overlay-bild-zoom projektlauftext-nachfolge"><img src="data/Layout 2/Layout_2-10.jpg" alt="24 Stunden"></div>
+            <div class="overlay-bild-zoom nebeneinander"><img src="data/Layout 2/Layout_2-11.jpg" alt="24 Stunden"></div>
+            <div class="overlay-bild-zoom nebeneinander stunden-vier-spalten" style="grid-column: span 4 !important; width: 100% !important;"><img src="data/Layout 2/Layout_2-6.jpg" alt="24 Stunden" style="display:block; width:100% !important; height:auto !important;"></div>
+            <div class="overlay-bild-zoom nebeneinander"><img src="data/Layout 2/Layout_2-7.jpg" alt="24 Stunden"></div>
+            <div class="overlay-bild-zoom nebeneinander"><img src="data/Layout 2/Layout_2-2.jpg" alt="24 Stunden"></div>
+            <div class="overlay-bild-zoom"><img src="data/Layout 2/Layout_2-12.jpg" alt="24 Stunden"></div>
+            <h2 class="prozess-titel">Prozess</h2>
+            <div class="prozess-flaechen" aria-hidden="true">
+                <div class="prozess-flaeche prozess-flaeche--links" data-position="links" role="button" tabindex="0" aria-label="Flächen nach links verschieben"></div>
+                <div class="prozess-flaeche" data-position="mitte" role="button" tabindex="0" aria-label="Flächen verschieben"></div>
+                <div class="prozess-flaeche prozess-flaeche--rechts" data-position="rechts" role="button" tabindex="0" aria-label="Flächen nach rechts verschieben"></div>
+                <span class="prozess-pfeil prozess-pfeil--links" aria-hidden="true"></span>
+                <span class="prozess-pfeil" aria-hidden="true"></span>
+                <button class="prozess-nach-oben" type="button" aria-label="Im Projekt nach oben springen"></button>
+                <div class="semantische-link">
+                    <span>Masterabschluss Konzerte</span>
+                    <span class="semantische-pfeil" aria-hidden="true"></span>
+                </div>
+                <div class="semantische-link masterabschluss-link">
+                    <span class="semantische-pfeil semantische-pfeil--links" aria-hidden="true"></span>
+                    <span>Paris Vorprojekt</span>
+                </div>
+            </div>
+        </div>
+        <div class="overlay-scrollbar" role="scrollbar" aria-label="Projekt scrollen" aria-controls="stunden-overlay-inhalt" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+            <span class="overlay-scrollbar__thumb"></span>
+        </div>
+    </dialog>
 </body>
 
-<script src="./script.js"></script>
+<script src="./script.js?v=20261126"></script>
 
 </html>
