@@ -12,14 +12,6 @@ const overlaySchliessen = projektOverlay.querySelector(".projekt-overlay__schlie
 const prozessNachOben = projektOverlay.querySelector(".prozess-nach-oben");
 const titel = projektOverlay.querySelector(".projekt-text");
 const prozessTitel = projektOverlay.querySelector(".prozess-titel");
-const prozessFlaechenRaster = projektOverlay.querySelector(".prozess-flaechen");
-const prozessFlaechen = [...prozessFlaechenRaster.querySelectorAll(".prozess-flaeche")];
-let prozessAnimationLaeuft = false;
-let ersteProzessFlaeche = 0;
-
-prozessFlaechen.forEach((flaeche, index) => {
-  flaeche.dataset.position = ["links", "mitte", "rechts"][index] || "ausgang-rechts";
-});
 
 let letzterScrollstand = 0;
 
@@ -167,6 +159,7 @@ let schwebenLetzterScrollstand = 0;
 function aktualisiereSchwebenTitelAnimation() {
   const dialogPosition = schwebenOverlay.getBoundingClientRect();
   const projekttitel = schwebenOverlay.querySelector(".projekt-text");
+  const prozessTitel = schwebenOverlay.querySelector(".prozess-titel");
   const ausloesepunkt = dialogPosition.top + dialogPosition.height * 0.8;
 
   if (projekttitel && projekttitel.getBoundingClientRect().top <= ausloesepunkt) {
@@ -330,67 +323,86 @@ function aktualisiereTitelAnimation() {
   }
 }
 
-function verschiebeProzessFlaechen(flaeche, event) {
-  if (prozessAnimationLaeuft) return;
+function initialisiereProzessFlaechen(raster) {
+  const flaechen = [...raster.querySelectorAll(".prozess-flaeche")];
+  if (flaechen.length < 3) return;
 
-  const aktuellePosition = flaeche.dataset.position;
-  let richtung = aktuellePosition === "rechts" ? -1 : aktuellePosition === "links" ? 1 : 1;
-
-  if (aktuellePosition === "mitte" && event.clientX) {
-    const mitte = flaeche.getBoundingClientRect().left + flaeche.offsetWidth / 2;
-    richtung = event.clientX < mitte ? -1 : 1;
-  }
-
-  prozessAnimationLaeuft = true;
-  const anzahl = prozessFlaechen.length;
-  const aktiveFlaechen = [0, 1, 2].map((abstand) => prozessFlaechen[(ersteProzessFlaeche + abstand) % anzahl]);
-  const eintretenderIndex = richtung > 0
-    ? (ersteProzessFlaeche - 1 + anzahl) % anzahl
-    : (ersteProzessFlaeche + 3) % anzahl;
-  const ausgehendeFlaeche = richtung > 0 ? aktiveFlaechen[2] : aktiveFlaechen[0];
-  const eintretendeFlaeche = prozessFlaechen[eintretenderIndex] === ausgehendeFlaeche
-    ? ausgehendeFlaeche.cloneNode(false)
-    : prozessFlaechen[eintretenderIndex];
-  const istKopie = eintretendeFlaeche !== prozessFlaechen[eintretenderIndex];
-  if (istKopie) prozessFlaechen[eintretenderIndex] = eintretendeFlaeche;
-
-  eintretendeFlaeche.dataset.position = richtung > 0 ? "ausgang-links" : "ausgang-rechts";
-  eintretendeFlaeche.classList.add("ohne-transition");
-  if (istKopie) prozessFlaechenRaster.append(eintretendeFlaeche);
-  void prozessFlaechenRaster.offsetWidth;
-  eintretendeFlaeche.classList.remove("ohne-transition");
-
-  requestAnimationFrame(() => {
-    const neuePositionen = richtung > 0
-      ? ["mitte", "rechts", "ausgang-rechts"]
-      : ["ausgang-links", "links", "mitte"];
-    aktiveFlaechen.forEach((element, index) => {
-      element.dataset.position = neuePositionen[index];
-    });
-    eintretendeFlaeche.dataset.position = richtung > 0 ? "links" : "rechts";
+  flaechen.forEach((flaeche, index) => {
+    flaeche.dataset.position = ["links", "mitte", "rechts"][index] || "ausgang-rechts";
   });
 
-  ausgehendeFlaeche.addEventListener("transitionend", () => {
-    if (istKopie) ausgehendeFlaeche.remove();
-    ersteProzessFlaeche = richtung > 0
-      ? eintretenderIndex
-      : (ersteProzessFlaeche + 1) % anzahl;
-    prozessAnimationLaeuft = false;
-  }, { once: true });
+  let animationLaeuft = false;
+  let ersteFlaeche = 0;
+
+  function verschiebe(flaeche, event, automatisch = false) {
+    if (animationLaeuft) return;
+
+    const position = flaeche.dataset.position;
+    let richtung = automatisch ? -1 : position === "rechts" ? -1 : position === "links" ? 1 : 1;
+
+    if (!automatisch && position === "mitte" && event.clientX) {
+      const mitte = flaeche.getBoundingClientRect().left + flaeche.offsetWidth / 2;
+      richtung = event.clientX < mitte ? -1 : 1;
+    }
+
+    animationLaeuft = true;
+    const anzahl = flaechen.length;
+    const sichtbar = [0, 1, 2].map((abstand) => flaechen[(ersteFlaeche + abstand) % anzahl]);
+    const neuerIndex = richtung > 0
+      ? (ersteFlaeche - 1 + anzahl) % anzahl
+      : (ersteFlaeche + 3) % anzahl;
+    const ausgehend = richtung > 0 ? sichtbar[2] : sichtbar[0];
+    const eingehend = flaechen[neuerIndex] === ausgehend
+      ? ausgehend.cloneNode(true)
+      : flaechen[neuerIndex];
+    const istKopie = eingehend !== flaechen[neuerIndex];
+    if (istKopie) flaechen[neuerIndex] = eingehend;
+
+    eingehend.dataset.position = richtung > 0 ? "ausgang-links" : "ausgang-rechts";
+    eingehend.classList.add("ohne-transition");
+    if (istKopie) raster.append(eingehend);
+    void raster.offsetWidth;
+    eingehend.classList.remove("ohne-transition");
+
+    requestAnimationFrame(() => {
+      const positionen = richtung > 0
+        ? ["mitte", "rechts", "ausgang-rechts"]
+        : ["ausgang-links", "links", "mitte"];
+      sichtbar.forEach((element, index) => {
+        element.dataset.position = positionen[index];
+      });
+      eingehend.dataset.position = richtung > 0 ? "links" : "rechts";
+    });
+
+    ausgehend.addEventListener("transitionend", () => {
+      if (istKopie) ausgehend.remove();
+      ersteFlaeche = richtung > 0 ? neuerIndex : (ersteFlaeche + 1) % anzahl;
+      animationLaeuft = false;
+    }, { once: true });
+  }
+
+  raster.addEventListener("click", (event) => {
+    const flaeche = event.target.closest(".prozess-flaeche");
+    if (flaeche) verschiebe(flaeche, event);
+  });
+
+  raster.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const flaeche = event.target.closest(".prozess-flaeche");
+    if (!flaeche) return;
+    event.preventDefault();
+    verschiebe(flaeche, event);
+  });
+
+  const dialog = raster.closest("dialog");
+  window.setInterval(() => {
+    if (!dialog || !dialog.open || document.hidden || animationLaeuft) return;
+    const mittlereFlaeche = flaechen.find((flaeche) => flaeche.dataset.position === "mitte");
+    if (mittlereFlaeche) verschiebe(mittlereFlaeche, null, true);
+  }, 7000);
 }
 
-prozessFlaechenRaster.addEventListener("click", (event) => {
-  const flaeche = event.target.closest(".prozess-flache");
-  if (flaeche) verschiebeProzessFlaechen(flaeche, event);
-});
-
-prozessFlaechenRaster.addEventListener("keydown", (event) => {
-  if (event.key !== "Enter" && event.key !== " ") return;
-  const flaeche = event.target.closest(".prozess-flaeche");
-  if (!flaeche) return;
-  event.preventDefault();
-  verschiebeProzessFlaechen(flaeche, event);
-});
+document.querySelectorAll(".prozess-flaechen").forEach(initialisiereProzessFlaechen);
 
 (function gruppiereSchwebenVideos() {
   const overlayGrid = document.querySelector("#schweben-overlay-inhalt");
@@ -1036,4 +1048,5 @@ stundenOverlay.querySelector(".overlay-pfeil-unten").addEventListener("click", (
 stundenOverlay.querySelector(".prozess-nach-oben").addEventListener("click", () => {
   stundenOverlay.scrollTo({ top: 0, behavior: "smooth" });
 });
+
 

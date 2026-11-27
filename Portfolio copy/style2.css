@@ -1,0 +1,1027 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  background-color: black;
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.raster {
+  --spaltenbreite: calc(13.333333vw - 17.066667px);
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  height: 100vh;
+  padding: 64px 16px 16px;
+  padding-bottom: 64px;
+}
+
+.startseite-titel {
+  position: fixed;
+  z-index: 2;
+  top: 32px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  color: #650018;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.startseite-name {
+  position: fixed;
+  z-index: 2;
+  top: 32px;
+  left: 16px;
+  transform: translateY(-50%);
+  margin: 0;
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.startseite-ueber {
+  position: fixed;
+  z-index: 2;
+  top: 32px;
+  right: 16px;
+  transform: translateY(-50%);
+  margin: 0;
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.startseite-titel,
+.startseite-name,
+.startseite-ueber {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  transition: color 150ms ease;
+}
+
+.startseite-titel:hover,
+.startseite-ueber:hover {
+  color: #650018;
+}
+
+.projektlauftext {
+  position: absolute;
+  top: 1140px;
+  left: 25px;
+  max-width: 700px;
+  margin: 0;
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.raster__spalte {
+  position: relative;
+  flex: 0 0 var(--spaltenbreite);
+  height: calc(100vh - 128px);
+  min-width: 0;
+  transition: flex-basis 500ms ease;
+}
+
+.raster__spalte:has(img:hover),
+.raster__spalte:has(video:hover) {
+  flex: 0 0 calc(53.333332vw - 20.266668px);
+}
+
+.raster__spalte img,
+.raster__spalte video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.raster__projekt-titel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.raster__pfeil {
+  position: absolute;
+  top: auto;
+  bottom: -48px;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: white;
+  font-size: 0;
+  line-height: 24px;
+  text-align: center;
+}
+
+button.raster__pfeil {
+  padding: 0;
+  border: 0;
+  background: rgb(101 0 24 / 72%);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.raster__pfeil::before {
+  position: absolute;
+  top: 10px;
+  width: 11px;
+  height: 4px;
+  background: currentColor;
+  content: "";
+}
+
+.raster__pfeil::after {
+  position: absolute;
+  top: 6px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  content: "";
+}
+
+.raster__pfeil--rechts::before {
+  left: 5px;
+}
+
+.raster__pfeil--rechts::after {
+  left: 13px;
+  border-left: 7px solid currentColor;
+}
+
+.raster__pfeil--links::before {
+  right: 5px;
+}
+
+.raster__pfeil--links::after {
+  right: 13px;
+  border-right: 7px solid currentColor;
+}
+
+button.raster__pfeil:hover,
+button.raster__pfeil:focus-visible {
+  background: rgb(255 255 255 / 85%);
+  color: #650018;
+}
+
+.raster__spalte:first-child .raster__pfeil {
+  text-align: left;
+}
+
+.raster__spalte:last-child .raster__pfeil {
+  right: 0;
+  left: auto;
+  text-align: right;
+}
+
+#spalte-10 {
+  cursor: pointer;
+}
+
+#spalte-schweben {
+  cursor: pointer;
+}
+
+#spalte-zeitlose {
+  cursor: pointer;
+}
+
+#spalte-einzigartigkeit {
+  cursor: pointer;
+}
+
+#spalte-semantische {
+  cursor: pointer;
+}
+
+#spalte-impro {
+  cursor: pointer;
+}
+
+#spalte-heat {
+  cursor: pointer;
+}
+
+@keyframes projektOeffnen {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.projekt-overlay {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(90vw, 1100px);
+  height: min(88vh, 800px);
+  max-width: none;
+  max-height: none;
+  padding: 24px;
+  border: 0;
+  background: #111;
+  color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  animation: none;
+  transition: none !important;
+}
+
+.projekt-overlay::-webkit-scrollbar {
+  display: none;
+}
+
+.overlay-scrollbar {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 100vh;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.overlay-scrollbar__thumb {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 6px;
+  min-height: 32px;
+  border-radius: 999px;
+  background: rgb(101 0 24 / 82%);
+}
+
+.overlay-scrollbar:hover .overlay-scrollbar__thumb,
+.overlay-scrollbar:focus-visible .overlay-scrollbar__thumb {
+  background: rgb(101 0 24 / 100%);
+}
+
+.start-scrollbar {
+  position: fixed;
+  z-index: 5;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 16px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.start-scrollbar__thumb {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgb(101 0 24 / 82%);
+}
+
+.start-scrollbar:hover .start-scrollbar__thumb,
+.start-scrollbar:focus-visible .start-scrollbar__thumb {
+  background: rgb(101 0 24 / 100%);
+}
+
+.projekt-overlay[open] {
+  display: block;
+}
+
+.projekt-overlay::backdrop {
+  background: rgb(32 3 3 / 96%);
+  animation: none !important;
+  transition: none !important;
+}
+
+.overlay-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.overlay-grid img {
+  display: block;
+  grid-column: 1 / -1;
+  width: 100%;
+  height: auto;
+}
+
+.overlay-grid .overlay-bild-zoom {
+  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay-bild-zoom.projektlauftext-nachfolge {
+  margin-top: 180px;
+}
+
+.overlay-grid .overlay-bild-zoom.nebeneinander-vier {
+  grid-column: span 4;
+  aspect-ratio: auto;
+}
+
+.overlay-grid .overlay-bild-zoom.nebeneinander-vier video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.overlay-grid .overlay-bild-zoom.nebeneinander video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.overlay-grid .overlay-bild-zoom.nebeneinander:hover video {
+  transform: none;
+}
+
+.overlay-pfeil-unten {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  transform: translateX(-50%);
+  border: 0;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
+  color: white;
+  --pfeil-farbe: #fff;
+  cursor: pointer;
+}
+
+.overlay-pfeil-unten::before {
+  position: absolute;
+  top: 9px;
+  left: 20px;
+  width: 8px;
+  height: 20px;
+  background: var(--pfeil-farbe);
+  content: "";
+}
+
+.overlay-pfeil-unten::after {
+  position: absolute;
+  top: 25px;
+  left: 11px;
+  border-top: 14px solid var(--pfeil-farbe);
+  border-right: 13px solid transparent;
+  border-left: 13px solid transparent;
+  content: "";
+}
+
+.overlay-pfeil-unten:hover,
+.overlay-pfeil-unten:focus-visible {
+  background: rgb(255 255 255 / 85%);
+  color: #650018;
+  --pfeil-farbe: #650018;
+}
+
+.overlay-grid .overlay-bild-zoom img {
+  transition: transform 300ms ease;
+}
+
+.overlay-grid .overlay-bild-zoom:hover img {
+  transform: scale(1.08);
+}
+
+.overlay-grid .overlay-bild-zoom video {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 300ms ease;
+}
+
+.overlay-grid .overlay-bild-zoom:hover video {
+  transform: scale(1.08);
+}
+
+.overlay-grid .overlay-bild-zoom.nebeneinander {
+  grid-column: span 4;
+}
+
+.overlay-grid .prozess-flaechen {
+  grid-column: 1 / -1;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 16px;
+  min-height: 320px;
+  margin-bottom: 128px;
+}
+
+.overlay-grid .prozess-flaeche {
+  grid-column: 3 / span 4;
+  grid-row: 1;
+  position: relative;
+  min-height: 320px;
+  background: #777;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 600ms ease;
+}
+
+.overlay-grid .prozess-flaeche img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay-grid .prozess-flaeche--rechts {
+  background: pink;
+}
+
+.overlay-grid .prozess-flaeche--links {
+  background: purple;
+}
+
+.overlay-grid .prozess-flaeche[data-position="links"] {
+  transform: translateX(calc(-100% - 16px));
+}
+
+.overlay-grid .prozess-flaeche[data-position="mitte"] {
+  transform: translateX(0);
+}
+
+.overlay-grid .prozess-flaeche[data-position="rechts"] {
+  transform: translateX(calc(100% + 16px));
+}
+
+.overlay-grid .prozess-flaeche[data-position="ausgang-links"] {
+  transform: translateX(calc(-200% - 32px));
+}
+
+.overlay-grid .prozess-flaeche[data-position="ausgang-rechts"] {
+  transform: translateX(calc(200% + 32px));
+}
+
+.overlay-grid .prozess-flaeche.ohne-transition {
+  transition: none;
+}
+
+.prozess-pfeil {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  z-index: 2;
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
+  --arrow-color: #fff;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.prozess-pfeil::before {
+  position: absolute;
+  top: 20.5px;
+  left: 10px;
+  width: 22px;
+  height: 7px;
+  background: var(--arrow-color);
+  content: "";
+}
+
+.prozess-pfeil::after {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 15px solid var(--arrow-color);
+  content: "";
+}
+
+.prozess-pfeil--links {
+  right: auto;
+  left: 16px;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.prozess-flaechen:has(.prozess-flaeche[data-position="links"]:hover) .prozess-pfeil--links,
+.prozess-flaechen:has(.prozess-flaeche[data-position="rechts"]:hover) .prozess-pfeil:not(.prozess-pfeil--links) {
+  background: rgb(255 255 255 / 85%);
+  --arrow-color: #650018;
+}
+
+.prozess-nach-oben {
+  position: absolute;
+  top: calc(100% + 80px);
+  left: 50%;
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
+  --pfeil-farbe: #fff;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.prozess-nach-oben:hover,
+.prozess-nach-oben:focus-visible {
+  background: rgb(255 255 255 / 85%);
+  --pfeil-farbe: #650018;
+}
+
+.prozess-nach-oben::before {
+  position: absolute;
+  top: 8px;
+  left: 11px;
+  border-right: 13px solid transparent;
+  border-bottom: 14px solid var(--pfeil-farbe);
+  border-left: 13px solid transparent;
+  content: "";
+}
+
+.prozess-nach-oben::after {
+  position: absolute;
+  top: 19px;
+  left: 20px;
+  width: 8px;
+  height: 20px;
+  background: var(--pfeil-farbe);
+  content: "";
+}
+
+.semantische-link {
+  position: absolute;
+  top: calc(100% + 80px);
+  right: 16px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 14px;
+}
+
+.masterabschluss-link {
+  right: auto;
+  left: 16px;
+}
+
+.semantische-pfeil {
+  position: relative;
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
+  --pfeil-farbe: #fff;
+}
+
+.semantische-pfeil--links {
+  transform: scaleX(-1);
+}
+
+.semantische-pfeil::before {
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  width: 11px;
+  height: 4px;
+  background: var(--pfeil-farbe);
+  content: "";
+}
+
+.semantische-pfeil::after {
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 7px solid var(--pfeil-farbe);
+  content: "";
+}
+
+.semantische-link:hover .semantische-pfeil {
+  background: rgb(255 255 255 / 85%);
+  --pfeil-farbe: #650018;
+}
+
+.overlay-grid .prozess-titel {
+  grid-column: 1 / -1;
+  margin: 100px 0 8px;
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(3rem, 11vw, 9rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 2000ms ease, opacity 2000ms ease;
+}
+
+.overlay-grid .projekt-text {
+  grid-column: 1 / -1;
+  display: flex;
+  min-height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  margin: 0;
+  padding: 32px 12px;
+  color: #ffffff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(3rem, 11vw, 9rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+.overlay-grid .projekt-text span {
+  display: block;
+  width: 100%;
+  opacity: 0;
+  transition: transform 2000ms ease, opacity 2000ms ease;
+}
+
+.overlay-grid .projekt-text span:first-child {
+  text-align: left;
+  transform: translateX(-100%);
+}
+
+.overlay-grid .projekt-text span:last-child {
+  text-align: right;
+  transform: translateX(100%);
+}
+
+.overlay-grid .projekt-text .heat-flavour {
+  text-align: center;
+  transform: translateX(-100%);
+}
+
+.overlay-grid .projekt-text.sichtbar span:nth-child(2),
+.overlay-grid .projekt-text.sichtbar .heat-flavour {
+  transform: translateX(0);
+}
+
+.overlay-grid .projekt-text.sichtbar span {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.overlay-grid .projekt-text.sichtbar:hover span:nth-child(2) {
+  transform: translateX(100%);
+}
+
+.overlay-grid .projekt-text.sichtbar:hover .heat-flavour {
+  transform: translateX(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay-grid .projekt-text span {
+    transition: none;
+  }
+}
+
+.overlay-grid img:first-child {
+  margin-bottom: 0;
+}
+
+.projekt-overlay__schliessen {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  z-index: 1;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(101 0 24 / 72%);
+  color: white;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.overlay-grid .motion-dreierreihe {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.overlay-grid .motion-dreierreihe .overlay-bild-zoom {
+  grid-column: auto;
+  aspect-ratio: auto;
+}
+
+.overlay-grid .motion-dreierreihe video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+#einzigartigkeit-overlay-inhalt > .overlay-bild-zoom.projektlauftext-nachfolge {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+#einzigartigkeit-overlay-inhalt > .overlay-bild-zoom.projektlauftext-nachfolge .overlay-bild-zoom {
+  grid-column: auto;
+}
+
+#einzigartigkeit-overlay-inhalt > .overlay-bild-zoom.projektlauftext-nachfolge video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#semantische-overlay-inhalt .semantische-paar {
+  height: 360px;
+  margin-top: 180px;
+}
+
+#semantische-overlay-inhalt .semantische-paar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#heat-overlay-inhalt .heat-poster {
+  grid-column: 6 / span 3;
+  width: 100%;
+  height: 360px;
+  margin-left: auto;
+}
+
+#heat-overlay-inhalt .heat-lightbox {
+  grid-column: 5 / 9;
+  height: 360px;
+  margin-top: 16px;
+}
+
+#heat-overlay-inhalt .heat-sugar {
+  grid-column: 1 / 5;
+  height: 360px;
+  margin-top: 16px;
+}
+
+#heat-overlay-inhalt .heat-truck {
+  grid-column: 5 / 9;
+  height: 360px;
+  margin-top: 16px;
+}
+
+#heat-overlay-inhalt .heat-poster img,
+#heat-overlay-inhalt .heat-lightbox img,
+#heat-overlay-inhalt .heat-sugar img,
+#heat-overlay-inhalt .heat-truck img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.overlay-grid .masterabschluss-titel span,
+.overlay-grid .masterabschluss-titel span:first-child,
+.overlay-grid .masterabschluss-titel span:last-child {
+  text-align: center;
+}
+
+#masterabschluss-overlay .masterabschluss-titel span:first-child {
+  text-align: left;
+}
+
+#masterabschluss-overlay .masterabschluss-titel span:nth-child(2) {
+  text-align: right;
+  transform: translateX(100%);
+}
+
+#masterabschluss-overlay .masterabschluss-titel span:last-child {
+  text-align: center;
+}
+
+#masterabschluss-overlay .masterabschluss-titel.sichtbar span:nth-child(2) {
+  transform: translateX(0);
+}
+
+#masterabschluss-overlay .masterabschluss-titel.sichtbar:hover span:nth-child(2) {
+  transform: translateX(100%);
+}
+
+#masterabschluss-overlay-inhalt {
+  align-items: start;
+}
+
+#masterabschluss-overlay-inhalt > .overlay-bild-zoom.nebeneinander {
+  grid-column: span 4;
+  height: auto;
+  margin: 180px 0 0;
+  align-self: start;
+}
+
+#masterabschluss-overlay-inhalt > .overlay-bild-zoom.nebeneinander img[src="data/Masterabschlusskonzerte/Mockup_Konzerte.jpg"] {
+  display: block;
+  height: 1330px;
+  width: 100%;
+  margin: 0;
+  object-fit: contain;
+}
+
+#masterabschluss-overlay_inhalt > .masterabschluss-media .masterabschluss-animation video {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  object-fit: contain;
+}
+
+#stunden-overlay-inhalt > .overlay-bild-zoom img[src="data/Layout 2/Layout_2-11.jpg"] {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#stunden-overlay-inhalt > .overlay-bild-zoom:has(img[src="data/Layout 2/Layout_2-11.jpg"]) {
+  grid-column: 1 / span 3;
+}
+
+#stunden-overlay-inhalt > .overlay-bild-zoom:has(img[src="data/Layout 2/Layout_2-6.jpg"]) {
+  grid-column: 5 / span 4;
+  width: 100%;
+}
+
+#stunden-overlay-inhalt > .overlay-bild-zoom:has(img[src="data/Layout 2/Layout_2-6.jpg"]) img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+#stunden-overlay-inhalt > .stunden-vier-spalten {
+  grid-column: span 4;
+  width: 100%;
+}
+
+#stunden-overlay-inhalt > .stunden-vier-spalten img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.semantische-link,
+.masterabschluss-link {
+  display: none !important;
+}
+
+.ueber-overlay {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(32 3 3 / 96%);
+}
+
+.ueber-overlay[hidden] {
+  display: none;
+}
+
+.ueber-overlay__fenster {
+  position: relative;
+  width: min(90vw, 1100px);
+  height: min(88vh, 800px);
+  min-height: 0;
+  padding: 24px;
+  background: #111;
+}
+
+.ueber-overlay__inhalt {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 8px 8px;
+}
+
+.ueber-overlay__inhalt h2 {
+  margin: 0 0 16px;
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+}
+
+.ueber-overlay__inhalt p {
+  max-width: 620px;
+  margin: 0;
+  color: #fff;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.startseite-titel.ueber-overlay-titel {
+  color: #fff;
+}
+
+#schweben-overlay-inhalt > .prozess-titel {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 2000ms ease, opacity 2000ms ease;
+}
+
+#schweben-overlay-inhalt > .motion-dreierreihe.projektlauftext-nachfolge {
+  margin-top: 260px;
+}
+
+#schweben-overlay-inhalt > .prozess-titel.sichtbar {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#heat-overlay-inhalt .projekt-text span {
+  opacity: 0;
+  transition: transform 2000ms ease, opacity 2000ms ease;
+}
+
+#heat-overlay-inhalt .projekt-text span:first-child {
+  text-align: left;
+  transform: translateX(-100%);
+}
+
+#heat-overlay-inhalt .projekt-text span:nth-child(2) {
+  text-align: right;
+  transform: translateX(100%);
+}
+
+#heat-overlay-inhalt .projekt-text .heat-flavour {
+  text-align: center;
+  transform: translateX(-100%);
+}
+
+#heat-overlay-inhalt .projekt-text.sichtbar span {
+  opacity: 1;
+  transform: translateX(0);
+}

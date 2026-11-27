@@ -43,11 +43,10 @@ body::-webkit-scrollbar {
   transform: translate(-50%, -50%);
   margin: 0;
   color: #650018;
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 400;
   line-height: 1;
-  letter-spacing: 0.01em;
 }
 
 .startseite-name {
@@ -58,7 +57,7 @@ body::-webkit-scrollbar {
   transform: translateY(-50%);
   margin: 0;
   color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 1;
@@ -72,19 +71,16 @@ body::-webkit-scrollbar {
   transform: translateY(-50%);
   margin: 0;
   color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 1;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
 }
 
 .startseite-titel,
 .startseite-name,
 .startseite-ueber {
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 1;
@@ -103,7 +99,7 @@ body::-webkit-scrollbar {
   max-width: 700px;
   margin: 0;
   color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 14px;
   line-height: 1.4;
   text-align: left;
@@ -137,7 +133,7 @@ body::-webkit-scrollbar {
   left: 0;
   width: 100%;
   color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 1;
@@ -610,7 +606,7 @@ button.raster__pfeil:focus-visible {
   gap: 8px;
   min-height: 48px;
   color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 14px;
 }
 
@@ -663,14 +659,19 @@ button.raster__pfeil:focus-visible {
   grid-column: 1 / -1;
   margin: 100px 0 8px;
   color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: clamp(3rem, 11vw, 9rem);
   font-weight: 900;
   line-height: 0.95;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.07em;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 2000ms ease, opacity 2000ms ease;
+}
+
+.overlay-grid .prozess-titel.sichtbar {
   opacity: 1;
   transform: translateX(0);
-  transition: transform 2000ms ease, opacity 2000ms ease;
 }
 
 .overlay-grid .projekt-text {
@@ -683,11 +684,11 @@ button.raster__pfeil:focus-visible {
   margin: 0;
   padding: 32px 12px;
   color: #ffffff;
-  font-family: "Montserrat", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: clamp(3rem, 11vw, 9rem);
   font-weight: 900;
   line-height: 0.95;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.07em;
   text-align: center;
 }
 
@@ -892,12 +893,6 @@ button.raster__pfeil:focus-visible {
 }
 
 #masterabschluss-overlay-inhalt > .masterabschluss-media {
-  width: 100%;
-  margin: 0;
-  object-fit: contain;
-}
-
-#masterabschluss-overlay-inhalt > .masterabschluss-media {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
@@ -966,73 +961,5 @@ button.raster__pfeil:focus-visible {
 .semantische-link,
 .masterabschluss-link {
   display: none !important;
-}
-
-.ueber-overlay {
-  position: fixed;
-  z-index: 100;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: rgb(32 3 3 / 96%);
-}
-
-.ueber-overlay[hidden] {
-  display: none;
-}
-
-.ueber-overlay__fenster {
-  position: relative;
-  width: min(90vw, 1100px);
-  height: min(88vh, 800px);
-  min-height: 0;
-  padding: 24px;
-  background: #111;
-}
-
-.ueber-overlay__inhalt {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 24px 8px 8px;
-}
-
-.ueber-overlay__inhalt h2 {
-  margin: 0 0 16px;
-  color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
-  font-size: clamp(48px, 8vw, 96px);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: 0.01em;
-}
-
-.ueber-overlay__inhalt p {
-  max-width: 620px;
-  margin: 0;
-  color: #fff;
-  font-family: "Montserrat", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.45;
-}
-
-.startseite-titel.ueber-overlay-titel {
-  color: #fff;
-}
-
-#schweben-overlay-inhalt > .prozess-titel {
-  opacity: 0;
-  transform: translateX(100%);
-  transition: transform 2000ms ease, opacity 2000ms ease;
-}
-
-#schweben-overlay-inhalt > .motion-dreierreihe.projektlauftext-nachfolge {
-  margin-top: 260px;
-}
-
-#schweben-overlay-inhalt > .prozess-titel.sichtbar {
-  opacity: 1;
-  transform: translateX(0);
 }
 
