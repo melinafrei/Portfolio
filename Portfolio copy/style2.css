@@ -1025,3 +1025,7 @@ button.raster__pfeil:focus-visible {
   opacity: 1;
   transform: translateX(0);
 }
+
+#heat-overlay-inhalt > .projektlauftext {
+  top: 1300px;
+}
