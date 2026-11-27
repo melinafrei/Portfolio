@@ -88,7 +88,6 @@ body::-webkit-scrollbar {
 }
 
 .startseite-titel:hover,
-.startseite-name:hover,
 .startseite-ueber:hover {
   color: #650018;
 }
