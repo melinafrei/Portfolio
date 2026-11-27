@@ -44,8 +44,8 @@ body::-webkit-scrollbar {
   margin: 0;
   color: #650018;
   font-family: "Montserrat", Arial, sans-serif;
-  font-size: 20px;
-  font-weight: 900;
+  font-size: 14px;
+  font-weight: 400;
   line-height: 1;
   letter-spacing: 0.01em;
 }
@@ -85,7 +85,7 @@ body::-webkit-scrollbar {
 .startseite-name,
 .startseite-ueber {
   font-family: "Montserrat", Arial, sans-serif;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1;
   transition: color 150ms ease;
@@ -668,9 +668,14 @@ button.raster__pfeil:focus-visible {
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: 0.01em;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 2000ms ease, opacity 2000ms ease;
+}
+
+.overlay-grid .prozess-titel.sichtbar {
   opacity: 1;
   transform: translateX(0);
-  transition: transform 2000ms ease, opacity 2000ms ease;
 }
 
 .overlay-grid .projekt-text {
@@ -1027,5 +1032,11 @@ button.raster__pfeil:focus-visible {
 }
 
 #heat-overlay-inhalt > .projektlauftext {
-  top: 1300px;
+  top: 1220px;
+  left: 25px;
+  transform: none;
+}
+
+#semantische-overlay-inhalt > .projektlauftext {
+  top: 1160px;
 }

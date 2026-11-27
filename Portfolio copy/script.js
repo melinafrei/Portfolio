@@ -710,7 +710,6 @@ function oeffneImproOverlay() {
   improOverlay.querySelector(".projekt-text").classList.remove("sichtbar");
   improOverlay.showModal();
   requestAnimationFrame(() => {
-    improOverlay.querySelector(".projekt-text").classList.add("sichtbar");
     aktualisiereImproTitelAnimation();
     aktualisiereImproScrollbar();
   });
